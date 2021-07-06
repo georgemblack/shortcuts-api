@@ -1,0 +1,19 @@
+{
+  "name": "shortcuts-api",
+  "version": "1.0.0",
+  "main": "app.js",
+  "repository": "https://github.com/georgemblack/shortcuts-api.git",
+  "author": "George Black <contact@george.black>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node ./src/app.js"
+  },
+  "dependencies": {
+    "config": "^3.3.6",
+    "express": "^4.17.1",
+    "google-auth-library": "^7.2.0",
+    "node-fetch": "^2.6.1",
+    "pino-http": "^5.5.0",
+    "rate-limiter-flexible": "^2.2.2"
+  }
+}

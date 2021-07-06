@@ -1,0 +1,30 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args: [ 'build', '-t', 'us-east1-docker.pkg.dev/$PROJECT_ID/private/shortcuts-api:$COMMIT_SHA', '.' ]
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-east1-docker.pkg.dev/$PROJECT_ID/private/shortcuts-api:$COMMIT_SHA']
+  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+    entrypoint: gcloud
+    args:
+    - 'run'
+    - 'deploy'
+    - 'shortcuts-api'
+    - '--image'
+    - 'us-east1-docker.pkg.dev/$PROJECT_ID/private/shortcuts-api:$COMMIT_SHA'
+    - '--region'
+    - 'us-east1'
+    - '--concurrency'
+    - '25'
+    - '--cpu'
+    - '1'
+    - '--max-instances'
+    - '1'
+    - '--memory'
+    - '128Mi'
+    - '--platform'
+    - 'managed'
+    - '--service-account'
+    - 'shortcuts-api-service@oceanblue.iam.gserviceaccount.com'
+    - '--allow-unauthenticated'
+images:
+  - 'us-east1-docker.pkg.dev/$PROJECT_ID/private/shortcuts-api:$COMMIT_SHA'
