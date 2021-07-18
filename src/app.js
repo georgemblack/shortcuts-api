@@ -4,6 +4,7 @@ const config = require("config");
 
 const rateLimit = require("./middlewares/rateLimit");
 const validate = require("./middlewares/validate");
+const shoebox = require("./services/shoebox");
 
 // Express setup
 const app = express();
@@ -24,5 +25,28 @@ app.use((req, res, next) => {
 app.get("/", (req, res) => {
   res.status(200).send("Howdy!");
 });
+
+app.post(
+  "/shoebox/entries",
+  rateLimit.rateLimit,
+  validate.validateShoeboxEntry,
+  async (req, res) => {
+    const body = req.body;
+
+    const entry = {
+      geopoint: {
+        latitude: body.geopoint.latitude,
+        longitude: body.geopoint.longitude,
+      },
+    };
+
+    try {
+      await shoebox.postEntry(entry);
+    } catch {
+      return res.status(500).send("Internal error");
+    }
+    return res.status(200).send();
+  }
+);
 
 app.listen(port, () => console.log(`Listening on port ${port}`));

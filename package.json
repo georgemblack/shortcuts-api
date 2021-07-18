@@ -6,14 +6,20 @@
   "author": "George Black <contact@george.black>",
   "license": "MIT",
   "scripts": {
-    "start": "node ./src/app.js"
+    "start": "node ./src/app.js",
+    "format": "prettier ./src --write"
   },
   "dependencies": {
     "config": "^3.3.6",
     "express": "^4.17.1",
+    "express-basic-auth": "^1.2.0",
     "google-auth-library": "^7.2.0",
+    "lodash.isequal": "^4.5.0",
     "node-fetch": "^2.6.1",
     "pino-http": "^5.5.0",
     "rate-limiter-flexible": "^2.2.2"
+  },
+  "devDependencies": {
+    "prettier": "^2.3.2"
   }
 }
