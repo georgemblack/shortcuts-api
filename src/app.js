@@ -34,10 +34,15 @@ app.post(
     const body = req.body;
 
     const entry = {
-      geopoint: {
-        latitude: body.geopoint.latitude,
-        longitude: body.geopoint.longitude,
-      },
+      content: [
+        {
+          type: "geopoint",
+          geopoint: {
+            latitude: body.geopoint.latitude,
+            longitude: body.geopoint.longitude,
+          },
+        },
+      ],
     };
 
     try {
