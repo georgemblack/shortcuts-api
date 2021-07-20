@@ -23,6 +23,7 @@ const logger = pino();
 app.use(auth);
 app.use(express.json());
 app.use(logger);
+app.disable("x-powered-by");
 const port = process.env.PORT || 8080;
 
 /**
