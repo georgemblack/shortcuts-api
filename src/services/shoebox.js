@@ -4,21 +4,20 @@ const config = require("config");
 const { GoogleAuth } = require("google-auth-library");
 const auth = new GoogleAuth();
 
-const SERVICE_ENDPOINT = config.get("shoeboxServiceEndpoint");
+const SERVICE_URL = config.get("shoeboxServiceEndpoint");
 let client;
 
 async function postEntry(entry) {
   if (!client) client = await auth.getIdTokenClient(SERVICE_URL);
   const clientHeaders = await client.getRequestHeaders();
 
-  let response = await fetch(SERVICE_URL, {
+  await fetch(`${SERVICE_URL}/entries`, {
     method: "POST",
     headers: {
       Authorization: clientHeaders["Authorization"],
     },
-    body: entry,
+    body: JSON.stringify(entry),
   });
-  return await response.json();
 }
 
 module.exports = {

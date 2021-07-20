@@ -47,10 +47,11 @@ app.post(
 
     try {
       await shoebox.postEntry(entry);
-    } catch {
+      return res.status(200).send();
+    } catch (err) {
+      console.log(err);
       return res.status(500).send("Internal error");
     }
-    return res.status(200).send();
   }
 );
 
