@@ -1,14 +1,26 @@
 const express = require("express");
 const pino = require("pino-http");
 const config = require("config");
+const basicAuth = require('express-basic-auth')
 
 const rateLimit = require("./middlewares/rateLimit");
 const validate = require("./middlewares/validate");
 const shoebox = require("./services/shoebox");
 
+const USERNAME = process.env.USERNAME || "test";
+const PASSWORD = process.env.PASSWORD || "abc123";
+
+// Auth setup
+auth = basicAuth({
+  users: {
+    [USERNAME]: PASSWORD
+  }
+})
+
 // Express setup
 const app = express();
 const logger = pino();
+app.use(auth);
 app.use(express.json());
 app.use(logger);
 const port = process.env.PORT || 8080;
