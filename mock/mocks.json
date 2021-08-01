@@ -1,0 +1,10 @@
+[
+    {
+      "httpRequest": {
+        "path": "/shoebox/entries"
+      },
+      "httpResponse": {
+        "body": "Thanks!"
+      }
+    }
+  ]
