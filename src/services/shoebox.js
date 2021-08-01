@@ -11,13 +11,17 @@ async function postEntry(entry) {
   if (!client) client = await auth.getIdTokenClient(SERVICE_URL);
   const clientHeaders = await client.getRequestHeaders();
 
-  await fetch(`${SERVICE_URL}/entries`, {
+  const response = await fetch(`${SERVICE_URL}/entries`, {
     method: "POST",
     headers: {
       Authorization: clientHeaders["Authorization"],
     },
     body: JSON.stringify(entry),
   });
+
+  if (!response.ok) {
+    throw "Failed to call Shoebox API!";
+  }
 }
 
 module.exports = {
