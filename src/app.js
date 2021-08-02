@@ -1,6 +1,5 @@
 const express = require("express");
 const pino = require("pino-http");
-const config = require("config");
 const basicAuth = require("express-basic-auth");
 
 const rateLimit = require("./middlewares/rateLimit");
@@ -12,7 +11,7 @@ const USERNAME = process.env.USERNAME || "test";
 const PASSWORD = process.env.PASSWORD || "abc123";
 
 // Auth setup
-auth = basicAuth({
+const auth = basicAuth({
   users: {
     [USERNAME]: PASSWORD,
   },
