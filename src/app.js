@@ -5,6 +5,7 @@ const basicAuth = require("express-basic-auth");
 
 const rateLimit = require("./middlewares/rateLimit");
 const validate = require("./middlewares/validate");
+const messages = require("./messages");
 const shoebox = require("./services/shoebox");
 
 const USERNAME = process.env.USERNAME || "test";
@@ -60,10 +61,10 @@ app.post(
 
     try {
       await shoebox.postEntry(entry);
-      return res.status(200).send();
+      return res.status(200).send({ message: messages.happyResponseMessage() });
     } catch (err) {
       console.log(err);
-      return res.status(500).send("Internal error");
+      return res.status(500).send({ message: messages.sadResponseMessage() });
     }
   }
 );
