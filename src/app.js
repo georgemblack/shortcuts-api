@@ -59,6 +59,13 @@ app.post(
       ],
     };
 
+    if (body.text) {
+      entry.content.push({
+        type: "text",
+        text: body.text,
+      });
+    }
+
     try {
       await shoebox.postEntry(entry);
       return res.status(200).send({ message: messages.happyResponseMessage() });
