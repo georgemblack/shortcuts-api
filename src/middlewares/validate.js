@@ -1,4 +1,4 @@
-const messages = require("./messages");
+const messages = require("../messages");
 
 function validateShoeboxEntry(req, res, next) {
   const body = req.body;
