@@ -11,7 +11,7 @@ async function postEntry(entry) {
   if (!client) client = await auth.getIdTokenClient(SERVICE_URL);
   const clientHeaders = await client.getRequestHeaders();
 
-  const response = await fetch(`${SERVICE_URL}/entries`, {
+  const response = await fetch(`${SERVICE_URL}/api/entries`, {
     method: "POST",
     headers: {
       Authorization: clientHeaders["Authorization"],
