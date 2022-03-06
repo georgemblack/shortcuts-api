@@ -44,27 +44,7 @@ app.post(
   rateLimit.rateLimit,
   validate.validateShoeboxEntry,
   async (req, res) => {
-    const body = req.body;
-
-    const entry = {
-      content: [
-        {
-          type: "geopoint",
-          geopoint: {
-            latitude: body.geopoint.latitude,
-            longitude: body.geopoint.longitude,
-          },
-        },
-      ],
-    };
-
-    if (body.text) {
-      entry.content.push({
-        type: "text",
-        text: body.text,
-      });
-    }
-
+    const entry = req.body;
     try {
       await shoebox.postEntry(entry);
       return res.status(200).send({ message: messages.happyResponseMessage() });
